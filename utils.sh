@@ -5,9 +5,10 @@
 #  Example: print_and_do_command echo 'hi'
 #
 function print_and_do_command {
-  echo "$ $@"
-  $@
+	echo "$ $@"
+	$@
 }
+
 
 #
 # This one expects a string as it's input, and will eval it
@@ -17,6 +18,21 @@ function print_and_do_command {
 #  of the precedence order of the '>' operator
 #
 function print_and_do_command_string {
-  echo "$ $1"
-  eval "$1"
+	echo "$ $1"
+	eval "$1"
 }
+
+
+#
+# Check the last command's result code and if it's not zero then print the given error message and exit with the command's exit code
+#
+function fail_if_cmd_error {
+	last_cmd_result=$?
+	if [ $last_cmd_result -ne 0 ]; then
+		echo $1
+		exit $last_cmd_result
+	fi
+}
+# TEST/EXAMPLE:
+# rm this/file/doesnt/exist
+# fail_if_cmd_error "Could not delete the file"
