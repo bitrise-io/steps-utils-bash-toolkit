@@ -1,6 +1,13 @@
 #!/bin/bash
 
 #
+# Printing and error reporting utility functions.
+#  See the end of this file for usage examples.
+#
+# You can find more bash utility / helper scripts at [https://github.com/bitrise-io/steps-utils-bash-toolkit](https://github.com/bitrise-io/steps-utils-bash-toolkit)
+#
+
+#
 # Prints the given command, then executes it
 #  Example: print_and_do_command echo 'hi'
 #
@@ -45,6 +52,12 @@ function fail_if_cmd_error {
 		exit ${last_cmd_result}
 	fi
 }
-# TEST/EXAMPLE:
-# rm this/file/doesnt/exist
-# fail_if_cmd_error "Could not delete the file"
+
+# EXAMPLES:
+
+# example with 'print_and_do_command_exit_on_error':
+#   print_and_do_command_exit_on_error brew install git
+ 
+# OR with the combination of 'print and do' and 'fail':
+# print_and_do_command brew install git
+#   fail_if_cmd_error "Failed to install git!"
